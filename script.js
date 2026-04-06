@@ -142,7 +142,9 @@ loadReports();
 
 // ===============================
 // ADD THIS AT THE BOTTOM 👇
-document.getElementById("reportBtn").addEventListener("click", async () => {
+document.getElementById("reportBtn").addEventListener("click", async (e) => {
+  e.preventDefault(); // 🔥 ADD THIS LINE
+
   const data = {
     reporterName: "Test User",
     issue: "Test Issue",
@@ -158,11 +160,8 @@ document.getElementById("reportBtn").addEventListener("click", async () => {
       body: JSON.stringify(data)
     });
 
-    const result = await res.text();
-    console.log(result);
     alert("Report submitted!");
   } catch (err) {
     console.error(err);
-    alert("Error submitting report");
   }
 });
