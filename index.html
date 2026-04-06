@@ -5,14 +5,14 @@
   <title>PawsCare</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
 
 <header class="nav">
   <div class="brand">🐾 PawsCare</div>
@@ -30,9 +30,8 @@
 
 <main>
 
-
+<!-- HOME -->
 <section id="home" class="page active">
-
   <div class="hero">
     <h1>Save a Paw, Save a Life</h1>
     <p>Real-time platform connecting rescuers, volunteers and adopters.</p>
@@ -64,7 +63,6 @@
     <h3>Total Reports</h3>
     <h1 id="totalReports">0</h1>
   </div>
-
 </section>
 
 <!-- REPORT -->
@@ -79,7 +77,8 @@
       <input id="location" placeholder="Location" required>
       <textarea id="description" placeholder="Description"></textarea>
 
-      <button id="reportBtn">Report Animal</button>
+      <!-- ✅ FIXED BUTTON -->
+      <button type="submit">Report Animal</button>
     </form>
   </div>
 </section>
@@ -96,18 +95,17 @@
     <h2>Adopt an Animal 🏠</h2>
 
     <form id="adoptForm">
-  <input id="adopterName" placeholder="Your Name" required>
-  <input id="adopterContact" placeholder="Contact" required>
-  <input id="preferredAnimal" placeholder="Preferred Animal">
-  <textarea id="adoptReason" placeholder="Why do you want to adopt?"></textarea>
+      <input id="adopterName" placeholder="Your Name" required>
+      <input id="adopterContact" placeholder="Contact" required>
+      <input id="preferredAnimal" placeholder="Preferred Animal">
+      <textarea id="adoptReason" placeholder="Why do you want to adopt?"></textarea>
 
-  <button type="submit">Submit Adoption Request</button>
-</form>
-
+      <button type="submit">Submit Adoption Request</button>
+    </form>
   </div>
 </section>
 
-<!-- DONATION -->
+<!-- DONATE -->
 <section id="donate" class="page">
   <div class="card">
     <h2>Support the Cause 💚</h2>
@@ -152,13 +150,12 @@
     </form>
   </div>
 </section>
-<section id="help" class="page">
 
+<!-- HELP -->
+<section id="help" class="page">
   <h2 style="text-align:center; margin:20px;">Nearby Help 🏥</h2>
 
   <div class="features">
-
-    <!-- VET -->
     <div class="feature-card">
       <h3>🐶 Vet Clinic</h3>
       <p><strong>Dr. Sharma Veterinary</strong></p>
@@ -173,7 +170,6 @@
       <p>📞 9123456780</p>
     </div>
 
-    <!-- SHELTER -->
     <div class="feature-card">
       <h3>🏠 Shelter</h3>
       <p><strong>Paws Shelter</strong></p>
@@ -187,17 +183,16 @@
       <p>📍 Uttam Nagar</p>
       <p>📞 9012345678</p>
     </div>
-
   </div>
-
 </section>
+
 </main>
 
 <footer>
   <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
 </footer>
 
-<!-- SOCKET -->
+<!-- ✅ SOCKET FIX -->
 <script src="/socket.io/socket.io.js"></script>
 
 <!-- JS -->
