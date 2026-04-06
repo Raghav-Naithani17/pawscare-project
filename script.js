@@ -1,5 +1,8 @@
-const API = "http://localhost:3000";
-const socket = io("http://localhost:3000");
+// ✅ AUTO-DETECT API (works local + deployed)
+const API = window.location.origin;
+
+// ✅ SOCKET FIX
+const socket = io();
 
 let reports = [];
 
@@ -11,15 +14,21 @@ function showPage(id) {
 
 /* LOAD REPORTS */
 async function loadReports() {
-  const res = await fetch(`${API}/reports`);
-  reports = await res.json();
-  renderReports();
-  updateDashboard();
+  try {
+    const res = await fetch(`${API}/reports`);
+    reports = await res.json();
+    renderReports();
+    updateDashboard();
+  } catch (err) {
+    console.error("Failed to load reports:", err);
+  }
 }
 
 /* RENDER REPORTS */
 function renderReports() {
   const container = document.getElementById("reportList");
+  if (!container) return;
+
   container.innerHTML = "";
 
   reports.forEach(r => {
@@ -53,54 +62,67 @@ function getPriority(desc = "") {
 
 /* DASHBOARD */
 function updateDashboard() {
-  document.getElementById("totalReports").textContent = reports.length;
+  const el = document.getElementById("totalReports");
+  if (el) el.textContent = reports.length;
 }
 
 /* REPORT FORM */
-document.getElementById("reportForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+const reportForm = document.getElementById("reportForm");
+if (reportForm) {
+  reportForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const item = {
-    reporterName: document.getElementById("reporterName").value,
-    reporterContact: document.getElementById("reporterContact").value,
-    animalType: document.getElementById("animalType").value,
-    location: document.getElementById("location").value,
-    description: document.getElementById("description").value,
-    createdAt: new Date().toISOString()
-  };
+    const item = {
+      reporterName: document.getElementById("reporterName").value,
+      reporterContact: document.getElementById("reporterContact").value,
+      animalType: document.getElementById("animalType").value,
+      location: document.getElementById("location").value,
+      description: document.getElementById("description").value
+    };
 
-  await fetch(`${API}/report`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(item)
+    try {
+      await fetch(`${API}/report`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
+      });
+
+      reportForm.reset();
+      await loadReports();
+      showPage("browse");
+    } catch (err) {
+      console.error("Report failed:", err);
+    }
   });
+}
 
-  document.getElementById("reportForm").reset();
-  await loadReports();
-  showPage("browse");
-});
+/* ADOPT FORM */
+const adoptForm = document.getElementById("adoptForm");
+if (adoptForm) {
+  adoptForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-/* ADOPT FORM (NOW SAVES TO /adopt) */
-document.getElementById("adoptForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+    const item = {
+      name: document.getElementById("adopterName").value,
+      contact: document.getElementById("adopterContact").value,
+      animal: document.getElementById("preferredAnimal").value,
+      reason: document.getElementById("adoptReason").value
+    };
 
-  const item = {
-    name: document.getElementById("adopterName").value,
-    contact: document.getElementById("adopterContact").value,
-    animal: document.getElementById("preferredAnimal").value,
-    reason: document.getElementById("adoptReason").value,
-    createdAt: new Date().toISOString()
-  };
+    try {
+      await fetch(`${API}/adopt`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
+      });
 
-  await fetch(`${API}/adopt`, {   // ✅ FIXED HERE
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(item)
+      adoptForm.reset();
+      alert("Adoption request submitted!");
+    } catch (err) {
+      console.error(err);
+    }
   });
-
-  document.getElementById("adoptForm").reset();
-  alert("Adoption request submitted!");
-});
+}
 
 /* UPDATE */
 async function markResolved(id) {
@@ -119,6 +141,10 @@ async function deleteReport(id) {
 }
 
 /* SOCKETS */
+socket.on("connect", () => {
+  console.log("✅ Socket connected:", socket.id);
+});
+
 socket.on("newReport", (data) => {
   reports.unshift(data);
   renderReports();
@@ -137,31 +163,3 @@ socket.on("deleteReport", (id) => {
 
 /* INITIAL LOAD */
 loadReports();
-// your existing code above 👆
-
-
-// ===============================
-// ADD THIS AT THE BOTTOM 👇
-document.getElementById("reportBtn").addEventListener("click", async (e) => {
-  e.preventDefault(); // 🔥 ADD THIS LINE
-
-  const data = {
-    reporterName: "Test User",
-    issue: "Test Issue",
-    location: "Test Location"
-  };
-
-  try {
-    const res = await fetch("https://pawscare-project.onrender.com/report", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    alert("Report submitted!");
-  } catch (err) {
-    console.error(err);
-  }
-});
