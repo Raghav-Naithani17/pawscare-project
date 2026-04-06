@@ -17,9 +17,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 /* DB CONNECT */
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.log("❌ DB Error:", err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  console.log("✅ MongoDB Connected Successfully");
+})
+.catch((err) => {
+  console.log("❌ MongoDB Connection Error:");
+  console.log(err);
+});
 
 /* =========================
    SCHEMAS
