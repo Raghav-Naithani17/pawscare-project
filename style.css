@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f4f7f9;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: #145a32;
+  color: white;
+}
+
+.nav a {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(rgba(0,100,0,0.7), rgba(0,0,0,0.7)),
+    url("https://images.unsplash.com/photo-1558788353-f76d92427f16");
+  color: white;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+}
+
+.hero-btns button {
+  margin: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+/* FEATURES */
+.features {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+}
+
+.feature-card {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* DASHBOARD */
+.dashboard {
+  text-align: center;
+  margin: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* FORM */
+.card {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card input, .card textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+/* REPORTS */
+#reportList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.report-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #1b5e20;
+  color: white;
+}
+/* PAGE VISIBILITY FIX */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+button {
+  background: #1e8449;
+  color: white;
+}
+
+button:hover {
+  background: #145a32;
+}
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.feature-card {
+  width: 250px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

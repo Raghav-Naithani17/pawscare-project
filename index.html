@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PawsCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<header class="nav">
+  <div class="brand">🐾 PawsCare</div>
+  <nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('report')">Report</a>
+    <a onclick="showPage('browse')">Browse</a>
+    <a onclick="showPage('adopt')">Adopt</a>
+    <a onclick="showPage('donate')">Donate</a>
+    <a onclick="showPage('volunteer')">Volunteer</a>
+    <a onclick="showPage('contact')">Contact</a>
+    <a onclick="showPage('help')">Find Help</a>
+  </nav>
+</header>
+
+<main>
+
+
+<section id="home" class="page active">
+
+  <div class="hero">
+    <h1>Save a Paw, Save a Life</h1>
+    <p>Real-time platform connecting rescuers, volunteers and adopters.</p>
+
+    <div class="hero-btns">
+      <button onclick="showPage('report')">Report Animal</button>
+      <button class="outline" onclick="showPage('browse')">Browse Reports</button>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <h3>🚑 Rescue</h3>
+      <p>Report injured animals instantly for quick help.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🏠 Adopt</h3>
+      <p>Find animals looking for a loving home.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🤝 Support</h3>
+      <p>Volunteer or donate to support the cause.</p>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <h3>Total Reports</h3>
+    <h1 id="totalReports">0</h1>
+  </div>
+
+</section>
+
+<!-- REPORT -->
+<section id="report" class="page">
+  <div class="card">
+    <h2>Report an Animal 🐶</h2>
+
+    <form id="reportForm">
+      <input id="reporterName" placeholder="Your Name">
+      <input id="reporterContact" placeholder="Contact" required>
+      <input id="animalType" placeholder="Animal Type" required>
+      <input id="location" placeholder="Location" required>
+      <textarea id="description" placeholder="Description"></textarea>
+
+      <button type="submit">Submit Report</button>
+    </form>
+  </div>
+</section>
+
+<!-- BROWSE -->
+<section id="browse" class="page">
+  <h2 style="text-align:center; margin:20px;">Recent Reports</h2>
+  <div id="reportList"></div>
+</section>
+
+<!-- ADOPTION -->
+<section id="adopt" class="page">
+  <div class="card">
+    <h2>Adopt an Animal 🏠</h2>
+
+    <form id="adoptForm">
+  <input id="adopterName" placeholder="Your Name" required>
+  <input id="adopterContact" placeholder="Contact" required>
+  <input id="preferredAnimal" placeholder="Preferred Animal">
+  <textarea id="adoptReason" placeholder="Why do you want to adopt?"></textarea>
+
+  <button type="submit">Submit Adoption Request</button>
+</form>
+
+  </div>
+</section>
+
+<!-- DONATION -->
+<section id="donate" class="page">
+  <div class="card">
+    <h2>Support the Cause 💚</h2>
+
+    <form>
+      <input placeholder="Your Name" required>
+      <input placeholder="Amount" required>
+      <input placeholder="UPI / Payment Info">
+
+      <button type="submit">Donate</button>
+    </form>
+  </div>
+</section>
+
+<!-- VOLUNTEER -->
+<section id="volunteer" class="page">
+  <div class="card">
+    <h2>Become a Volunteer 🤝</h2>
+
+    <form>
+      <input placeholder="Your Name" required>
+      <input placeholder="Contact" required>
+      <input placeholder="City">
+      <textarea placeholder="How can you help?"></textarea>
+
+      <button type="submit">Join</button>
+    </form>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page">
+  <div class="card">
+    <h2>Contact Us 📞</h2>
+
+    <form>
+      <input placeholder="Your Name">
+      <input placeholder="Email">
+      <textarea placeholder="Message"></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+<section id="help" class="page">
+
+  <h2 style="text-align:center; margin:20px;">Nearby Help 🏥</h2>
+
+  <div class="features">
+
+    <!-- VET -->
+    <div class="feature-card">
+      <h3>🐶 Vet Clinic</h3>
+      <p><strong>Dr. Sharma Veterinary</strong></p>
+      <p>📍 Delhi</p>
+      <p>📞 9876543210</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🐾 Pet Care</h3>
+      <p><strong>Happy Pets Clinic</strong></p>
+      <p>📍 Dwarka</p>
+      <p>📞 9123456780</p>
+    </div>
+
+    <!-- SHELTER -->
+    <div class="feature-card">
+      <h3>🏠 Shelter</h3>
+      <p><strong>Paws Shelter</strong></p>
+      <p>📍 Janakpuri</p>
+      <p>📞 9988776655</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🐕 Rescue Center</h3>
+      <p><strong>Animal Care NGO</strong></p>
+      <p>📍 Uttam Nagar</p>
+      <p>📞 9012345678</p>
+    </div>
+
+  </div>
+
+</section>
+</main>
+
+<footer>
+  <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
+</footer>
+
+<!-- SOCKET -->
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
