@@ -137,3 +137,32 @@ socket.on("deleteReport", (id) => {
 
 /* INITIAL LOAD */
 loadReports();
+// your existing code above 👆
+
+
+// ===============================
+// ADD THIS AT THE BOTTOM 👇
+document.getElementById("reportBtn").addEventListener("click", async () => {
+  const data = {
+    reporterName: "Test User",
+    issue: "Test Issue",
+    location: "Test Location"
+  };
+
+  try {
+    const res = await fetch("https://pawscare-project.onrender.com/report", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.text();
+    console.log(result);
+    alert("Report submitted!");
+  } catch (err) {
+    console.error(err);
+    alert("Error submitting report");
+  }
+});
