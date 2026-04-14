@@ -1,4 +1,4 @@
-const API = window.location.origin;
+
 const socket = io();
 
 let reports = [];
