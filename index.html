@@ -32,17 +32,17 @@
 
 <!-- HOME -->
 <section id="home" class="page active">
-  <div class="hero">
-    <h1>Save a Paw, Save a Life</h1>
+  <div class="hero modern-hero">
+    <h1>Save a Paw, Save a Life 🐾</h1>
     <p>Real-time platform connecting rescuers, volunteers and adopters.</p>
 
     <div class="hero-btns">
-      <button onclick="showPage('report')">Report Animal</button>
-      <button class="outline" onclick="showPage('browse')">Browse Reports</button>
+      <button class="primary-btn" onclick="showPage('report')">Report Animal</button>
+      <button class="outline-btn" onclick="showPage('browse')">Browse Reports</button>
     </div>
   </div>
 
-  <div class="features">
+  <div class="features modern-grid">
     <div class="feature-card">
       <h3>🚑 Rescue</h3>
       <p>Report injured animals instantly for quick help.</p>
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <div class="dashboard">
+  <div class="dashboard modern-card">
     <h3>Total Reports</h3>
     <h1 id="totalReports">0</h1>
   </div>
@@ -67,122 +67,98 @@
 
 <!-- REPORT -->
 <section id="report" class="page">
-  <div class="card">
+  <div class="card modern-card">
     <h2>Report an Animal 🐶</h2>
 
-    <form id="reportForm">
+    <form id="reportForm" class="modern-form">
       <input id="reporterName" placeholder="Your Name">
       <input id="reporterContact" placeholder="Contact" required>
       <input id="animalType" placeholder="Animal Type" required>
       <input id="location" placeholder="Location" required>
       <textarea id="description" placeholder="Description"></textarea>
 
-      <!-- ✅ FIXED BUTTON -->
-      <button type="submit">Report Animal</button>
+      <button class="primary-btn" type="submit">Report Animal</button>
     </form>
   </div>
 </section>
 
 <!-- BROWSE -->
 <section id="browse" class="page">
-  <h2 style="text-align:center; margin:20px;">Recent Reports</h2>
-  <div id="reportList"></div>
+  <h2 class="section-title">Recent Reports</h2>
+  <div id="reportList" class="modern-grid"></div>
 </section>
 
 <!-- ADOPTION -->
 <section id="adopt" class="page">
-  <div class="card">
+  <div class="card modern-card">
     <h2>Adopt an Animal 🏠</h2>
 
-    <form id="adoptForm">
+    <form id="adoptForm" class="modern-form">
       <input id="adopterName" placeholder="Your Name" required>
       <input id="adopterContact" placeholder="Contact" required>
       <input id="preferredAnimal" placeholder="Preferred Animal">
       <textarea id="adoptReason" placeholder="Why do you want to adopt?"></textarea>
 
-      <button type="submit">Submit Adoption Request</button>
+      <button class="primary-btn" type="submit">Submit Adoption Request</button>
     </form>
   </div>
 </section>
 
 <!-- DONATE -->
 <section id="donate" class="page">
-  <div class="card">
+  <div class="card modern-card">
     <h2>Support the Cause 💚</h2>
 
-    <form>
+    <form class="modern-form">
       <input placeholder="Your Name" required>
       <input placeholder="Amount" required>
       <input placeholder="UPI / Payment Info">
 
-      <button type="submit">Donate</button>
+      <button class="primary-btn" type="submit">Donate</button>
     </form>
   </div>
 </section>
 
 <!-- VOLUNTEER -->
 <section id="volunteer" class="page">
-  <div class="card">
+  <div class="card modern-card">
     <h2>Become a Volunteer 🤝</h2>
 
-    <form>
+    <form class="modern-form">
       <input placeholder="Your Name" required>
       <input placeholder="Contact" required>
       <input placeholder="City">
       <textarea placeholder="How can you help?"></textarea>
 
-      <button type="submit">Join</button>
+      <button class="primary-btn" type="submit">Join</button>
     </form>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="page">
-  <div class="card">
+  <div class="card modern-card">
     <h2>Contact Us 📞</h2>
 
-    <form>
+    <form class="modern-form">
       <input placeholder="Your Name">
       <input placeholder="Email">
       <textarea placeholder="Message"></textarea>
 
-      <button type="submit">Send</button>
+      <button class="primary-btn" type="submit">Send</button>
     </form>
   </div>
 </section>
 
 <!-- HELP -->
 <section id="help" class="page">
-  <h2 style="text-align:center; margin:20px;">Nearby Help 🏥</h2>
+  <h2 class="section-title">Nearby Help 🏥</h2>
 
-  <div class="features">
-    <div class="feature-card">
-      <h3>🐶 Vet Clinic</h3>
-      <p><strong>Dr. Sharma Veterinary</strong></p>
-      <p>📍 Delhi</p>
-      <p>📞 9876543210</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🐾 Pet Care</h3>
-      <p><strong>Happy Pets Clinic</strong></p>
-      <p>📍 Dwarka</p>
-      <p>📞 9123456780</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🏠 Shelter</h3>
-      <p><strong>Paws Shelter</strong></p>
-      <p>📍 Janakpuri</p>
-      <p>📞 9988776655</p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🐕 Rescue Center</h3>
-      <p><strong>Animal Care NGO</strong></p>
-      <p>📍 Uttam Nagar</p>
-      <p>📞 9012345678</p>
-    </div>
+  <div class="features modern-grid">
+    <div class="feature-card">🐶 Vet Clinic<br>Dr. Sharma<br>Delhi</div>
+    <div class="feature-card">🐾 Pet Care<br>Happy Pets<br>Dwarka</div>
+    <div class="feature-card">🏠 Shelter<br>Paws Shelter<br>Janakpuri</div>
+    <div class="feature-card">🐕 Rescue<br>Animal Care NGO<br>Uttam Nagar</div>
   </div>
 </section>
 
@@ -192,10 +168,7 @@
   <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
 </footer>
 
-<!-- ✅ SOCKET FIX -->
 <script src="/socket.io/socket.io.js"></script>
-
-<!-- JS -->
 <script src="script.js"></script>
 
 </body>
