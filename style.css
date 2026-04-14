@@ -9,7 +9,6 @@ body {
   background: #f4f7f9;
 }
 
-/* NAV */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -23,28 +22,25 @@ body {
   cursor: pointer;
 }
 
-/* HERO */
 .hero {
   text-align: center;
   padding: 80px 20px;
   background: linear-gradient(rgba(0,100,0,0.7), rgba(0,0,0,0.7)),
     url("https://images.unsplash.com/photo-1558788353-f76d92427f16");
-  background-size: cover;
-  background-position: center;
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
   margin: 20px;
 }
 
 .hero h1 {
-  font-size: 42px;
+  font-size: 40px;
 }
 
 .hero-btns button {
   margin: 15px;
   padding: 12px 20px;
   border: none;
-  border-radius: 25px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -59,33 +55,29 @@ body {
   display: flex;
   gap: 20px;
   padding: 30px;
-  justify-content: center;
 }
 
 .feature-card {
-  width: 250px;
+  flex: 1;
   background: white;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* DASHBOARD (FIXED SPACING) */
+/* DASHBOARD */
 .dashboard {
   text-align: center;
-  margin: 80px auto 40px auto;
+  margin: 20px;
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 /* FORM */
 .card {
   max-width: 500px;
-  margin: 40px auto;
+  margin: auto;
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -111,7 +103,21 @@ body {
   border-radius: 10px;
 }
 
-/* BUTTON */
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #1b5e20;
+  color: white;
+}
+/* PAGE VISIBILITY FIX */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
 button {
   background: #1e8449;
   color: white;
@@ -120,20 +126,18 @@ button {
 button:hover {
   background: #145a32;
 }
-
-/* PAGE */
-.page {
-  display: none;
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-.page.active {
-  display: block;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
+.feature-card {
+  width: 250px;
+  background: white;
   padding: 15px;
-  background: #1b5e20;
-  color: white;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }

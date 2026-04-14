@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 <!-- HOME -->
 <section id="home" class="page active">
   <div class="hero">
-    <h1>Save a Paw, Save a Life 🐾</h1>
+    <h1>Save a Paw, Save a Life</h1>
     <p>Real-time platform connecting rescuers, volunteers and adopters.</p>
 
     <div class="hero-btns">
@@ -77,6 +77,7 @@
       <input id="location" placeholder="Location" required>
       <textarea id="description" placeholder="Description"></textarea>
 
+      <!-- ✅ FIXED BUTTON -->
       <button type="submit">Report Animal</button>
     </form>
   </div>
@@ -88,7 +89,7 @@
   <div id="reportList"></div>
 </section>
 
-<!-- ADOPT -->
+<!-- ADOPTION -->
 <section id="adopt" class="page">
   <div class="card">
     <h2>Adopt an Animal 🏠</h2>
@@ -104,6 +105,52 @@
   </div>
 </section>
 
+<!-- DONATE -->
+<section id="donate" class="page">
+  <div class="card">
+    <h2>Support the Cause 💚</h2>
+
+    <form>
+      <input placeholder="Your Name" required>
+      <input placeholder="Amount" required>
+      <input placeholder="UPI / Payment Info">
+
+      <button type="submit">Donate</button>
+    </form>
+  </div>
+</section>
+
+<!-- VOLUNTEER -->
+<section id="volunteer" class="page">
+  <div class="card">
+    <h2>Become a Volunteer 🤝</h2>
+
+    <form>
+      <input placeholder="Your Name" required>
+      <input placeholder="Contact" required>
+      <input placeholder="City">
+      <textarea placeholder="How can you help?"></textarea>
+
+      <button type="submit">Join</button>
+    </form>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page">
+  <div class="card">
+    <h2>Contact Us 📞</h2>
+
+    <form>
+      <input placeholder="Your Name">
+      <input placeholder="Email">
+      <textarea placeholder="Message"></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
 <!-- HELP -->
 <section id="help" class="page">
   <h2 style="text-align:center; margin:20px;">Nearby Help 🏥</h2>
@@ -111,12 +158,30 @@
   <div class="features">
     <div class="feature-card">
       <h3>🐶 Vet Clinic</h3>
-      <p>Delhi</p>
+      <p><strong>Dr. Sharma Veterinary</strong></p>
+      <p>📍 Delhi</p>
+      <p>📞 9876543210</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🐾 Pet Care</h3>
+      <p><strong>Happy Pets Clinic</strong></p>
+      <p>📍 Dwarka</p>
+      <p>📞 9123456780</p>
     </div>
 
     <div class="feature-card">
       <h3>🏠 Shelter</h3>
-      <p>Janakpuri</p>
+      <p><strong>Paws Shelter</strong></p>
+      <p>📍 Janakpuri</p>
+      <p>📞 9988776655</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🐕 Rescue Center</h3>
+      <p><strong>Animal Care NGO</strong></p>
+      <p>📍 Uttam Nagar</p>
+      <p>📞 9012345678</p>
     </div>
   </div>
 </section>
@@ -127,7 +192,10 @@
   <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
 </footer>
 
+<!-- ✅ SOCKET FIX -->
 <script src="/socket.io/socket.io.js"></script>
+
+<!-- JS -->
 <script src="script.js"></script>
 
 </body>
