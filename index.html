@@ -5,8 +5,11 @@
   <title>PawsCare</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
@@ -18,6 +21,10 @@
     <a onclick="showPage('report')">Report</a>
     <a onclick="showPage('browse')">Browse</a>
     <a onclick="showPage('adopt')">Adopt</a>
+    <a onclick="showPage('donate')">Donate</a>
+    <a onclick="showPage('volunteer')">Volunteer</a>
+    <a onclick="showPage('contact')">Contact</a>
+    <a onclick="showPage('help')">Find Help</a>
   </nav>
 </header>
 
@@ -27,13 +34,28 @@
 <section id="home" class="page active">
   <div class="hero">
     <h1>Save a Paw, Save a Life 🐾</h1>
-    <p>Helping animals with real-time reporting</p>
-
-    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b" class="hero-img">
+    <p>Real-time platform connecting rescuers, volunteers and adopters.</p>
 
     <div class="hero-btns">
       <button onclick="showPage('report')">Report Animal</button>
-      <button onclick="showPage('browse')">Browse Reports</button>
+      <button class="outline" onclick="showPage('browse')">Browse Reports</button>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <h3>🚑 Rescue</h3>
+      <p>Report injured animals instantly for quick help.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🏠 Adopt</h3>
+      <p>Find animals looking for a loving home.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🤝 Support</h3>
+      <p>Volunteer or donate to support the cause.</p>
     </div>
   </div>
 
@@ -46,46 +68,63 @@
 <!-- REPORT -->
 <section id="report" class="page">
   <div class="card">
-    <h2>Report Animal</h2>
+    <h2>Report an Animal 🐶</h2>
 
     <form id="reportForm">
-      <input id="reporterName" placeholder="Name">
+      <input id="reporterName" placeholder="Your Name">
       <input id="reporterContact" placeholder="Contact" required>
       <input id="animalType" placeholder="Animal Type" required>
       <input id="location" placeholder="Location" required>
       <textarea id="description" placeholder="Description"></textarea>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Report Animal</button>
     </form>
   </div>
 </section>
 
 <!-- BROWSE -->
 <section id="browse" class="page">
-  <h2 class="title">Reports</h2>
+  <h2 style="text-align:center; margin:20px;">Recent Reports</h2>
   <div id="reportList"></div>
 </section>
 
 <!-- ADOPT -->
 <section id="adopt" class="page">
   <div class="card">
-    <h2>Adopt</h2>
+    <h2>Adopt an Animal 🏠</h2>
 
     <form id="adoptForm">
-      <input id="adopterName" placeholder="Name" required>
+      <input id="adopterName" placeholder="Your Name" required>
       <input id="adopterContact" placeholder="Contact" required>
-      <input id="preferredAnimal" placeholder="Animal">
-      <textarea id="adoptReason" placeholder="Reason"></textarea>
+      <input id="preferredAnimal" placeholder="Preferred Animal">
+      <textarea id="adoptReason" placeholder="Why do you want to adopt?"></textarea>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Submit Adoption Request</button>
     </form>
+  </div>
+</section>
+
+<!-- HELP -->
+<section id="help" class="page">
+  <h2 style="text-align:center; margin:20px;">Nearby Help 🏥</h2>
+
+  <div class="features">
+    <div class="feature-card">
+      <h3>🐶 Vet Clinic</h3>
+      <p>Delhi</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🏠 Shelter</h3>
+      <p>Janakpuri</p>
+    </div>
   </div>
 </section>
 
 </main>
 
 <footer>
-  <p>© PawsCare</p>
+  <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
 </footer>
 
 <script src="/socket.io/socket.io.js"></script>

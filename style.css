@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -18,62 +18,89 @@ body {
   color: white;
 }
 
+.nav a {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
 /* HERO */
 .hero {
   text-align: center;
   padding: 80px 20px;
-  margin: 30px auto;
-  max-width: 900px;
-  background: #1e8449;
+  background: linear-gradient(rgba(0,100,0,0.7), rgba(0,0,0,0.7)),
+    url("https://images.unsplash.com/photo-1558788353-f76d92427f16");
+  background-size: cover;
+  background-position: center;
   color: white;
-  border-radius: 12px;
+  border-radius: 15px;
+  margin: 20px;
 }
 
-.hero-img {
-  width: 200px;
-  margin: 20px 0;
-  border-radius: 10px;
+.hero h1 {
+  font-size: 42px;
 }
 
-.hero button {
-  margin: 10px;
-  padding: 10px 20px;
+.hero-btns button {
+  margin: 15px;
+  padding: 12px 20px;
   border: none;
-  background: white;
-  color: green;
-  border-radius: 20px;
+  border-radius: 25px;
   cursor: pointer;
 }
 
-/* DASHBOARD */
-.dashboard {
-  text-align: center;
-  margin: 30px auto;
-  max-width: 400px;
+.outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+/* FEATURES */
+.features {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  justify-content: center;
+}
+
+.feature-card {
+  width: 250px;
   background: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* DASHBOARD (FIXED SPACING) */
+.dashboard {
+  text-align: center;
+  margin: 80px auto 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 /* FORM */
 .card {
-  max-width: 400px;
+  max-width: 500px;
   margin: 40px auto;
   background: white;
   padding: 20px;
   border-radius: 10px;
 }
 
-.card input,
-.card textarea {
+.card input, .card textarea {
   width: 100%;
   margin: 10px 0;
   padding: 10px;
 }
 
-/* REPORT LIST */
+/* REPORTS */
 #reportList {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
   gap: 20px;
   padding: 20px;
 }
@@ -84,14 +111,17 @@ body {
   border-radius: 10px;
 }
 
-.report-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
+/* BUTTON */
+button {
+  background: #1e8449;
+  color: white;
 }
 
-/* PAGE SYSTEM */
+button:hover {
+  background: #145a32;
+}
+
+/* PAGE */
 .page {
   display: none;
 }
@@ -99,14 +129,11 @@ body {
 .page.active {
   display: block;
 }
-/* FIX DASHBOARD SPACING */
-.dashboard {
-  margin: 60px auto 40px auto;  /* pushes it down */
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
 
-/* ADD EXTRA SPACE BELOW FEATURES */
-.features {
-  margin-bottom: 30px;
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #1b5e20;
+  color: white;
 }
