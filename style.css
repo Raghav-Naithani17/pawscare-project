@@ -99,3 +99,14 @@ body {
 .page.active {
   display: block;
 }
+/* FIX DASHBOARD SPACING */
+.dashboard {
+  margin: 60px auto 40px auto;  /* pushes it down */
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ADD EXTRA SPACE BELOW FEATURES */
+.features {
+  margin-bottom: 30px;
+}
