@@ -1,4 +1,7 @@
+// ✅ AUTO-DETECT API (works local + deployed)
 const API = window.location.origin;
+
+// ✅ SOCKET FIX
 const socket = io();
 
 let reports = [];
@@ -21,17 +24,6 @@ async function loadReports() {
   }
 }
 
-/* ESCAPE HTML (SECURITY) */
-function escapeHtml(str) {
-  return String(str || "").replace(/[&<>"']/g, s => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[s]));
-}
-
 /* RENDER REPORTS */
 function renderReports() {
   const container = document.getElementById("reportList");
@@ -46,15 +38,11 @@ function renderReports() {
     const priority = getPriority(r.description);
 
     div.innerHTML = `
-      <h4>${escapeHtml(r.animalType)}</h4>
-      <p>${escapeHtml(r.location)}</p>
-      <p>${escapeHtml(r.description)}</p>
-
-      ${r.image ? `<img src="/uploads/${r.image}" width="100" style="margin-top:10px;">` : ""}
-
+      <h4>${r.animalType || "Animal"}</h4>
+      <p>${r.location || ""}</p>
+      <p>${r.description || ""}</p>
       <p class="${priority.toLowerCase()}">${priority}</p>
-      <p>Status: ${r.status}</p>
-      <p style="font-size:12px;">${new Date(r.createdAt).toLocaleString()}</p>
+      <p>Status: ${r.status || "Pending"}</p>
 
       <button onclick="markResolved('${r._id}')">Resolve</button>
       <button onclick="deleteReport('${r._id}')" style="background:red">Delete</button>
@@ -78,34 +66,30 @@ function updateDashboard() {
   if (el) el.textContent = reports.length;
 }
 
-/* REPORT FORM (WITH IMAGE UPLOAD) */
+/* REPORT FORM */
 const reportForm = document.getElementById("reportForm");
-
 if (reportForm) {
   reportForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-
-    formData.append("reporterName", document.getElementById("reporterName").value);
-    formData.append("reporterContact", document.getElementById("reporterContact").value);
-    formData.append("animalType", document.getElementById("animalType").value);
-    formData.append("location", document.getElementById("location").value);
-    formData.append("description", document.getElementById("description").value);
-
-    const file = document.getElementById("image").files[0];
-    if (file) formData.append("image", file);
+    const item = {
+      reporterName: document.getElementById("reporterName").value,
+      reporterContact: document.getElementById("reporterContact").value,
+      animalType: document.getElementById("animalType").value,
+      location: document.getElementById("location").value,
+      description: document.getElementById("description").value
+    };
 
     try {
       await fetch(`${API}/report`, {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
       });
 
       reportForm.reset();
       await loadReports();
       showPage("browse");
-
     } catch (err) {
       console.error("Report failed:", err);
     }
@@ -114,7 +98,6 @@ if (reportForm) {
 
 /* ADOPT FORM */
 const adoptForm = document.getElementById("adoptForm");
-
 if (adoptForm) {
   adoptForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -152,8 +135,6 @@ async function markResolved(id) {
 
 /* DELETE */
 async function deleteReport(id) {
-  if (!confirm("Are you sure?")) return;
-
   await fetch(`${API}/report/${id}`, {
     method: "DELETE"
   });
@@ -161,7 +142,7 @@ async function deleteReport(id) {
 
 /* SOCKETS */
 socket.on("connect", () => {
-  console.log("Socket connected:", socket.id);
+  console.log("✅ Socket connected:", socket.id);
 });
 
 socket.on("newReport", (data) => {
@@ -180,5 +161,5 @@ socket.on("deleteReport", (id) => {
   renderReports();
 });
 
-/* INIT */
+/* INITIAL LOAD */
 loadReports();
