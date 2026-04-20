@@ -77,7 +77,9 @@
       <input id="location" placeholder="Location" required>
       <textarea id="description" placeholder="Description"></textarea>
 
-      <!-- ✅ FIXED BUTTON -->
+      <!-- ✅ IMAGE UPLOAD -->
+      <input type="file" id="image" accept="image/*">
+
       <button type="submit">Report Animal</button>
     </form>
   </div>
@@ -110,7 +112,7 @@
   <div class="card">
     <h2>Support the Cause 💚</h2>
 
-    <form>
+    <form onsubmit="event.preventDefault()">
       <input placeholder="Your Name" required>
       <input placeholder="Amount" required>
       <input placeholder="UPI / Payment Info">
@@ -125,7 +127,7 @@
   <div class="card">
     <h2>Become a Volunteer 🤝</h2>
 
-    <form>
+    <form onsubmit="event.preventDefault()">
       <input placeholder="Your Name" required>
       <input placeholder="Contact" required>
       <input placeholder="City">
@@ -141,7 +143,7 @@
   <div class="card">
     <h2>Contact Us 📞</h2>
 
-    <form>
+    <form onsubmit="event.preventDefault()">
       <input placeholder="Your Name">
       <input placeholder="Email">
       <textarea placeholder="Message"></textarea>
@@ -192,7 +194,7 @@
   <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
 </footer>
 
-<!-- ✅ SOCKET FIX -->
+<!-- SOCKET -->
 <script src="/socket.io/socket.io.js"></script>
 
 <!-- JS -->
