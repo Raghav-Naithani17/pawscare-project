@@ -6,7 +6,7 @@ const socket = io();
 
 let reports = [];
 
-// 🔥 NEW VARIABLES (SEARCH + FILTER)
+// 🔥 SEARCH + FILTER VARIABLES
 let searchText = "";
 let selectedPriority = "ALL";
 
@@ -55,7 +55,6 @@ function renderReports() {
 
   container.innerHTML = "";
 
-  // 🔥 FILTER LOGIC
   const filtered = reports.filter(r => {
     const priority = getPriority(r.description);
 
@@ -90,11 +89,32 @@ function renderReports() {
   });
 }
 
-/* AI PRIORITY */
+/* 🔥 IMPROVED PRIORITY (SCORING SYSTEM) */
 function getPriority(desc = "") {
   desc = desc.toLowerCase();
-  if (desc.includes("injured") || desc.includes("accident")) return "HIGH";
-  if (desc.includes("stray") || desc.includes("hungry")) return "MEDIUM";
+
+  let score = 0;
+
+  const high = [
+    "injured", "accident", "hurt", "wounded", "bleeding",
+    "hit", "critical", "fracture", "unconscious", "emergency"
+  ];
+
+  const medium = [
+    "stray", "hungry", "lost", "weak", "sick",
+    "abandoned", "thin"
+  ];
+
+  high.forEach(word => {
+    if (desc.includes(word)) score += 2;
+  });
+
+  medium.forEach(word => {
+    if (desc.includes(word)) score += 1;
+  });
+
+  if (score >= 2) return "HIGH";
+  if (score === 1) return "MEDIUM";
   return "LOW";
 }
 
