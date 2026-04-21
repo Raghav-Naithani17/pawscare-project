@@ -77,7 +77,6 @@
       <input id="location" placeholder="Location" required>
       <textarea id="description" placeholder="Description"></textarea>
 
-      <!-- ✅ FIXED BUTTON -->
       <button type="submit">Report Animal</button>
     </form>
   </div>
@@ -86,6 +85,21 @@
 <!-- BROWSE -->
 <section id="browse" class="page">
   <h2 style="text-align:center; margin:20px;">Recent Reports</h2>
+
+  <!-- 🔥 SEARCH + FILTER ADDED -->
+  <div style="text-align:center; margin:20px;">
+    <input id="searchInput" placeholder="Search by animal or location"
+           style="padding:10px; width:250px; margin-right:10px; border-radius:8px; border:1px solid #ccc;">
+
+    <select id="filterPriority"
+            style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+      <option value="ALL">All Priorities</option>
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
+  </div>
+
   <div id="reportList"></div>
 </section>
 
@@ -192,10 +206,7 @@
   <p>© 2026 PawsCare | Real-Time Animal Rescue System</p>
 </footer>
 
-<!-- ✅ SOCKET FIX -->
 <script src="/socket.io/socket.io.js"></script>
-
-<!-- JS -->
 <script src="script.js"></script>
 
 </body>

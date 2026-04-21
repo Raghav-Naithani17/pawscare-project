@@ -6,6 +6,10 @@ const socket = io();
 
 let reports = [];
 
+// 🔥 NEW VARIABLES (SEARCH + FILTER)
+let searchText = "";
+let selectedPriority = "ALL";
+
 /* PAGE NAVIGATION */
 function showPage(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -24,6 +28,26 @@ async function loadReports() {
   }
 }
 
+/* 🔥 SEARCH + FILTER EVENTS */
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const filterPriority = document.getElementById("filterPriority");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchText = e.target.value.toLowerCase();
+      renderReports();
+    });
+  }
+
+  if (filterPriority) {
+    filterPriority.addEventListener("change", (e) => {
+      selectedPriority = e.target.value;
+      renderReports();
+    });
+  }
+});
+
 /* RENDER REPORTS */
 function renderReports() {
   const container = document.getElementById("reportList");
@@ -31,7 +55,21 @@ function renderReports() {
 
   container.innerHTML = "";
 
-  reports.forEach(r => {
+  // 🔥 FILTER LOGIC
+  const filtered = reports.filter(r => {
+    const priority = getPriority(r.description);
+
+    const matchesSearch =
+      (r.animalType || "").toLowerCase().includes(searchText) ||
+      (r.location || "").toLowerCase().includes(searchText);
+
+    const matchesPriority =
+      selectedPriority === "ALL" || priority === selectedPriority;
+
+    return matchesSearch && matchesPriority;
+  });
+
+  filtered.forEach(r => {
     const div = document.createElement("div");
     div.className = "report-card";
 
