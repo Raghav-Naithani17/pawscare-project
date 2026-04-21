@@ -126,6 +126,7 @@ if (reportForm) {
       });
 
       reportForm.reset();
+      alert("✅ Report submitted successfully!");
       await loadReports();
       showPage("browse");
     } catch (err) {

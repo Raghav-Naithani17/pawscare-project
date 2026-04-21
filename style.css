@@ -141,3 +141,17 @@ button:hover {
   text-align: center;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
+.high {
+  color: red;
+  font-weight: bold;
+}
+
+.medium {
+  color: orange;
+  font-weight: bold;
+}
+
+.low {
+  color: green;
+  font-weight: bold;
+}
