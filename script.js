@@ -89,7 +89,7 @@ function renderReports() {
   });
 }
 
-/* 🔥 IMPROVED PRIORITY (SCORING SYSTEM) */
+/*  IMPROVED PRIORITY (SCORING SYSTEM) */
 function getPriority(desc = "") {
   desc = desc.toLowerCase();
 
