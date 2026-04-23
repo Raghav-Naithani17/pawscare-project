@@ -1,12 +1,12 @@
-// ✅ AUTO-DETECT API (works local + deployed)
+//  AUTO-DETECT API (works local + deployed)
 const API = window.location.origin;
 
-// ✅ SOCKET FIX
+//  SOCKET FIX
 const socket = io();
 
 let reports = [];
 
-// 🔥 SEARCH + FILTER VARIABLES
+//  SEARCH + FILTER VARIABLES
 let searchText = "";
 let selectedPriority = "ALL";
 
@@ -28,7 +28,7 @@ async function loadReports() {
   }
 }
 
-/* 🔥 SEARCH + FILTER EVENTS */
+/*  SEARCH + FILTER EVENTS */
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("searchInput");
   const filterPriority = document.getElementById("filterPriority");

@@ -8,7 +8,7 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 
-/* ✅ SOCKET FIX (important for Render) */
+/*  SOCKET FIX (important for Render) */
 const io = new Server(server, {
   cors: {
     origin: "*",
