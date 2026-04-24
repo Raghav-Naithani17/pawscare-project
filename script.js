@@ -106,13 +106,14 @@ function getPriority(desc = "") {
   ];
 
   high.forEach(word => {
-    if (desc.includes(word)) score += 2;
-  });
+  const regex = new RegExp(`\\b${word}\\b`);
+  if (regex.test(desc)) score += 2;
+});
 
-  medium.forEach(word => {
-    if (desc.includes(word)) score += 1;
-  });
-
+ medium.forEach(word => {
+  const regex = new RegExp(`\\b${word}\\b`);
+  if (regex.test(desc)) score += 1;
+});
   if (score >= 2) return "HIGH";
   if (score === 1) return "MEDIUM";
   return "LOW";
