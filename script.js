@@ -1,12 +1,12 @@
-//  AUTO-DETECT API (works local + deployed)
+// AUTO-DETECT API (works local + deployed)
 const API = window.location.origin;
 
-//  SOCKET FIX
+// SOCKET FIX
 const socket = io();
 
 let reports = [];
 
-//  SEARCH + FILTER VARIABLES
+// SEARCH + FILTER VARIABLES
 let searchText = "";
 let selectedPriority = "ALL";
 
@@ -22,13 +22,13 @@ async function loadReports() {
     const res = await fetch(`${API}/reports`);
     reports = await res.json();
     renderReports();
-    updateDashboard();
+    updateDashboard(); // 🔥 update on load
   } catch (err) {
     console.error("Failed to load reports:", err);
   }
 }
 
-/*  SEARCH + FILTER EVENTS */
+/* SEARCH + FILTER EVENTS */
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("searchInput");
   const filterPriority = document.getElementById("filterPriority");
@@ -89,7 +89,7 @@ function renderReports() {
   });
 }
 
-/*  IMPROVED PRIORITY (SCORING SYSTEM) */
+/* PRIORITY (SCORING SYSTEM + REGEX FIX) */
 function getPriority(desc = "") {
   desc = desc.toLowerCase();
 
@@ -106,23 +106,42 @@ function getPriority(desc = "") {
   ];
 
   high.forEach(word => {
-  const regex = new RegExp(`\\b${word}\\b`);
-  if (regex.test(desc)) score += 2;
-});
+    const regex = new RegExp(`\\b${word}\\b`);
+    if (regex.test(desc)) score += 2;
+  });
 
- medium.forEach(word => {
-  const regex = new RegExp(`\\b${word}\\b`);
-  if (regex.test(desc)) score += 1;
-});
+  medium.forEach(word => {
+    const regex = new RegExp(`\\b${word}\\b`);
+    if (regex.test(desc)) score += 1;
+  });
+
   if (score >= 2) return "HIGH";
   if (score === 1) return "MEDIUM";
   return "LOW";
 }
 
-/* DASHBOARD */
+/* 🔥 REAL-TIME ANALYTICS DASHBOARD */
 function updateDashboard() {
-  const el = document.getElementById("totalReports");
-  if (el) el.textContent = reports.length;
+  let total = reports.length;
+  let high = 0, medium = 0, low = 0;
+
+  reports.forEach(r => {
+    const priority = getPriority(r.description);
+
+    if (priority === "HIGH") high++;
+    else if (priority === "MEDIUM") medium++;
+    else low++;
+  });
+
+  const t = document.getElementById("totalReports");
+  const h = document.getElementById("highCount");
+  const m = document.getElementById("mediumCount");
+  const l = document.getElementById("lowCount");
+
+  if (t) t.textContent = total;
+  if (h) h.textContent = high;
+  if (m) m.textContent = medium;
+  if (l) l.textContent = low;
 }
 
 /* REPORT FORM */
@@ -200,7 +219,7 @@ async function deleteReport(id) {
   });
 }
 
-/* SOCKETS */
+/* SOCKETS (REAL-TIME UPDATES) */
 socket.on("connect", () => {
   console.log("✅ Socket connected:", socket.id);
 });
@@ -208,17 +227,19 @@ socket.on("connect", () => {
 socket.on("newReport", (data) => {
   reports.unshift(data);
   renderReports();
-  updateDashboard();
+  updateDashboard(); // 🔥 FIXED
 });
 
 socket.on("updateReport", (updated) => {
   reports = reports.map(r => r._id === updated._id ? updated : r);
   renderReports();
+  updateDashboard(); // 🔥 FIXED
 });
 
 socket.on("deleteReport", (id) => {
   reports = reports.filter(r => r._id !== id);
   renderReports();
+  updateDashboard(); // 🔥 FIXED
 });
 
 /* INITIAL LOAD */
