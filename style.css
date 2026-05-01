@@ -90,9 +90,11 @@ body {
 /* STATS GRID */
 .stats {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: center;   /* center them */
+  gap: 20px;                 /* spacing between cards */
   flex-wrap: wrap;
+  max-width: 800px;          /* 🔥 controls width */
+  margin: auto;              /* center container */
 }
 
 /* CARD STYLE */
