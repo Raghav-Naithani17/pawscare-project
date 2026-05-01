@@ -1,10 +1,11 @@
 // AUTO-DETECT API (works local + deployed)
 const API = window.location.origin;
 
-// SOCKET FIX
+// SOCKET
 const socket = io();
 
 let reports = [];
+let chart; // 🔥 for Chart.js
 
 // SEARCH + FILTER VARIABLES
 let searchText = "";
@@ -22,13 +23,13 @@ async function loadReports() {
     const res = await fetch(`${API}/reports`);
     reports = await res.json();
     renderReports();
-    updateDashboard(); // 🔥 update on load
+    updateDashboard();
   } catch (err) {
     console.error("Failed to load reports:", err);
   }
 }
 
-/* SEARCH + FILTER EVENTS */
+/* SEARCH + FILTER */
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("searchInput");
   const filterPriority = document.getElementById("filterPriority");
@@ -89,30 +90,27 @@ function renderReports() {
   });
 }
 
-/* PRIORITY (SCORING SYSTEM + REGEX FIX) */
+/* PRIORITY LOGIC */
 function getPriority(desc = "") {
   desc = desc.toLowerCase();
-
   let score = 0;
 
   const high = [
-    "injured", "accident", "hurt", "wounded", "bleeding",
-    "hit", "critical", "fracture", "unconscious", "emergency"
+    "injured","accident","hurt","wounded","bleeding",
+    "hit","critical","fracture","unconscious","emergency"
   ];
 
   const medium = [
-    "stray", "hungry", "lost", "weak", "sick",
-    "abandoned", "thin"
+    "stray","hungry","lost","weak","sick",
+    "abandoned","thin"
   ];
 
   high.forEach(word => {
-    const regex = new RegExp(`\\b${word}\\b`);
-    if (regex.test(desc)) score += 2;
+    if (new RegExp(`\\b${word}\\b`).test(desc)) score += 2;
   });
 
   medium.forEach(word => {
-    const regex = new RegExp(`\\b${word}\\b`);
-    if (regex.test(desc)) score += 1;
+    if (new RegExp(`\\b${word}\\b`).test(desc)) score += 1;
   });
 
   if (score >= 2) return "HIGH";
@@ -120,28 +118,56 @@ function getPriority(desc = "") {
   return "LOW";
 }
 
-/* 🔥 REAL-TIME ANALYTICS DASHBOARD */
+/* 🔥 DASHBOARD + CHART */
 function updateDashboard() {
   let total = reports.length;
   let high = 0, medium = 0, low = 0;
 
   reports.forEach(r => {
-    const priority = getPriority(r.description);
-
-    if (priority === "HIGH") high++;
-    else if (priority === "MEDIUM") medium++;
+    const p = getPriority(r.description);
+    if (p === "HIGH") high++;
+    else if (p === "MEDIUM") medium++;
     else low++;
   });
 
-  const t = document.getElementById("totalReports");
-  const h = document.getElementById("highCount");
-  const m = document.getElementById("mediumCount");
-  const l = document.getElementById("lowCount");
+  // update UI
+  document.getElementById("totalReports").textContent = total;
+  document.getElementById("highCount").textContent = high;
+  document.getElementById("mediumCount").textContent = medium;
+  document.getElementById("lowCount").textContent = low;
 
-  if (t) t.textContent = total;
-  if (h) h.textContent = high;
-  if (m) m.textContent = medium;
-  if (l) l.textContent = low;
+  // update chart
+  renderChart(high, medium, low);
+}
+
+/* 🔥 CHART FUNCTION */
+function renderChart(high, medium, low) {
+  const ctx = document.getElementById("priorityChart");
+  if (!ctx) return;
+
+  if (chart) {
+    chart.data.datasets[0].data = [high, medium, low];
+    chart.update();
+    return;
+  }
+
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["High", "Medium", "Low"],
+      datasets: [{
+        label: "Cases",
+        data: [high, medium, low],
+        backgroundColor: ["#e74c3c", "#f39c12", "#2ecc71"]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
 }
 
 /* REPORT FORM */
@@ -158,20 +184,16 @@ if (reportForm) {
       description: document.getElementById("description").value
     };
 
-    try {
-      await fetch(`${API}/report`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      });
+    await fetch(`${API}/report`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    });
 
-      reportForm.reset();
-      alert("✅ Report submitted successfully!");
-      await loadReports();
-      showPage("browse");
-    } catch (err) {
-      console.error("Report failed:", err);
-    }
+    reportForm.reset();
+    alert("✅ Report submitted!");
+    await loadReports();
+    showPage("browse");
   });
 }
 
@@ -188,18 +210,14 @@ if (adoptForm) {
       reason: document.getElementById("adoptReason").value
     };
 
-    try {
-      await fetch(`${API}/adopt`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      });
+    await fetch(`${API}/adopt`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    });
 
-      adoptForm.reset();
-      alert("Adoption request submitted!");
-    } catch (err) {
-      console.error(err);
-    }
+    adoptForm.reset();
+    alert("Adoption request submitted!");
   });
 }
 
@@ -219,27 +237,23 @@ async function deleteReport(id) {
   });
 }
 
-/* SOCKETS (REAL-TIME UPDATES) */
-socket.on("connect", () => {
-  console.log("✅ Socket connected:", socket.id);
-});
-
+/* SOCKET EVENTS */
 socket.on("newReport", (data) => {
   reports.unshift(data);
   renderReports();
-  updateDashboard(); // 🔥 FIXED
+  updateDashboard();
 });
 
 socket.on("updateReport", (updated) => {
   reports = reports.map(r => r._id === updated._id ? updated : r);
   renderReports();
-  updateDashboard(); // 🔥 FIXED
+  updateDashboard();
 });
 
 socket.on("deleteReport", (id) => {
   reports = reports.filter(r => r._id !== id);
   renderReports();
-  updateDashboard(); // 🔥 FIXED
+  updateDashboard();
 });
 
 /* INITIAL LOAD */
