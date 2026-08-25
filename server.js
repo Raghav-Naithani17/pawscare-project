@@ -26,6 +26,8 @@ app.use(express.static(__dirname));
 /* =========================
    DB CONNECT (FIXED)
 ========================= */
+console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
+console.log("NODE_ENV:", process.env.NODE_ENV);
 async function connectDB() {
   try {
     console.log("Connecting to MongoDB...");
