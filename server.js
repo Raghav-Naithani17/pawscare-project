@@ -26,14 +26,24 @@ app.use(express.static(__dirname));
 /* =========================
    DB CONNECT (FIXED)
 ========================= */
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-  console.log("✅ MongoDB Connected Successfully");
-})
-.catch((err) => {
-  console.log("❌ MongoDB Connection Error:");
-  console.log(err);
-});
+async function connectDB() {
+  try {
+    console.log("Connecting to MongoDB...");
+
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 30000
+    });
+
+    console.log("✅ MongoDB Connected Successfully");
+  } catch (err) {
+    console.error("❌ MongoDB Connection Error:");
+    console.error(err);
+
+    process.exit(1);
+  }
+}
+
+connectDB();
 
 /* =========================
    SCHEMAS
